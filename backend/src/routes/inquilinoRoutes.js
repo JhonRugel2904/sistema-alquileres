@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const { registrarInquilino } = require('../controllers/inquilinoController');
+// Fíjate en las llaves { }, son obligatorias para importar funciones específicas
+const { registrarInquilino, getInquilinos } = require('../controllers/inquilinoController');
 
-// Ruta: POST http://localhost:3000/api/inquilinos
+// Ahora sí podrás usarlas sin error
+router.get('/', getInquilinos); 
 router.post('/', registrarInquilino);
 
 module.exports = router;
