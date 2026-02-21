@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom'; // 1. Importante importar esto
-import { Home, Users, Building2, CreditCard } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Home, Users, Building2, CreditCard, LayoutGrid } from 'lucide-react'; // Agregamos LayoutGrid
 
 export default function Navbar() {
   return (
@@ -7,7 +7,7 @@ export default function Navbar() {
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo / Título */}
         <Link to="/" className="text-xl font-bold flex items-center gap-2 hover:text-blue-400 transition">
-          <Building2 className="text-blue-500" />
+          <Building2 className="text-blue-500" size={24} />
           <span>Sistema Alquileres</span>
         </Link>
 
@@ -17,9 +17,14 @@ export default function Navbar() {
             <Users size={18} /> Inquilinos
           </Link>
           
-          {/* AQUÍ ESTÁ EL CAMBIO PARA PROPIEDADES */}
+          {/* Propiedades = Edificios/Casas */}
           <Link to="/propiedades" className="hover:text-blue-400 transition flex items-center gap-1">
-            <Home size={18} /> Propiedades
+            <Building2 size={18} /> Propiedades
+          </Link>
+          
+          {/* Unidades = Cuartos/Depas (Cambiamos el icono a LayoutGrid para que se distinga) */}
+          <Link to="/unidades" className="hover:text-blue-400 transition flex items-center gap-1">
+            <LayoutGrid size={18} /> Unidades
           </Link>
 
           <Link to="/pagos" className="hover:text-blue-400 transition flex items-center gap-1">
