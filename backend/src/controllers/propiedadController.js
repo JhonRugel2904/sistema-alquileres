@@ -10,5 +10,16 @@ const registrarPropiedad = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 };
-
-module.exports = { registrarPropiedad };
+const getPropiedades = async (req, res) => {
+    try {
+        // Traemos las propiedades ordenadas
+        const query = 'SELECT * FROM propiedades ORDER BY id ASC';
+        const resultado = await db.query(query);
+        res.status(200).json(resultado.rows);
+    } catch (error) {
+        res.status(500).json({ mensaje: "Error al obtener propiedades", error: error.message });
+    }
+};
+module.exports = { registrarPropiedad,
+                    getPropiedades
+                };
