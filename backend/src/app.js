@@ -1,9 +1,10 @@
 const express = require('express');
 require('dotenv').config();
-const cors = require('cors'); // Movido arriba
+const cors = require('cors'); 
 const db = require('./config/db');
 
 // 1. Importación de las rutas
+const authRoutes = require('./routes/auth'); // <--- NUEVA RUTA DE LOGIN/REGISTRO
 const inquilinoRoutes = require('./routes/inquilinoRoutes'); 
 const propiedadRoutes = require('./routes/propiedadRoutes');
 const cuartoRoutes = require('./routes/unidadRoutes');
@@ -12,19 +13,19 @@ const pagoRoutes = require('./routes/pagoRoutes');
 
 const app = express();
 
-// 2. Middlewares (El orden importa mucho)
-app.use(cors()); // 1ero: Habilitar acceso desde el frontend
-app.use(express.json()); // 2do: Permitir leer JSON en el body
+// 2. Middlewares (El orden es vital para que funcione el Login)
+app.use(cors()); // Permite que el frontend se conecte
+app.use(express.json()); // Permite que el servidor entienda los datos JSON que envías
 
 // 3. Rutas del sistema
+app.use('/api/auth', authRoutes); // <--- ENDPOINT PARA LOGIN Y REGISTRO
 app.use('/api/inquilinos', inquilinoRoutes); 
 app.use('/api/propiedades', propiedadRoutes);
 app.use('/api/unidades', cuartoRoutes);
 app.use('/api/contratos', contratoRoutes);
 app.use('/api/pagos', pagoRoutes);
 
-// Nota: El endpoint de estado-cuenta debería estar dentro de pagoRoutes.js 
-// para mantener el orden, pero si quieres dejarlo aquí, se usa así:
+// Endpoint de estado de cuenta (opcional si ya está en pagoRoutes)
 app.get('/api/estado-cuenta/:contrato_id', (req, res) => {
     // Aquí iría la lógica o el llamado al controlador
 });

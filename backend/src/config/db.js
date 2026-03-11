@@ -12,10 +12,13 @@ const pool = new Pool({
 // Probar conexión
 pool.query('SELECT NOW()', (err, res) => {
   if (err) {
-    console.error('Error conectando a la base de datos:', err);
+    console.error('❌ Error conectando a la base de datos:', err);
   } else {
-    console.log('Conexión a PostgreSQL exitosa');
+    console.log('✅ Conexión a PostgreSQL exitosa');
   }
 });
 
-module.exports = pool;
+// CAMBIO AQUÍ: Exportamos un objeto que contiene la función query
+module.exports = {
+  query: (text, params) => pool.query(text, params),
+};
