@@ -1,40 +1,51 @@
 # 🏢 Sistema de Gestión de Alquileres Pro
 
-Sistema integral para la administración de inquilinos, unidades inmobiliarias, contratos y control de pagos. Diseñado con una arquitectura moderna Fullstack (PERN Stack).
-
-## 🚀 Características Principales
-
-* **Autenticación Segura:** Login y Registro con encriptación de contraseñas mediante `bcryptjs` y sesiones manejadas con `JWT`.
-* **Gestión de Inquilinos:** CRUD completo para la administración de arrendatarios.
-* **Control de Unidades:** Administración de departamentos, cuartos o locales.
-* **Contratos y Pagos:** Registro de contratos vinculados y gestión de historial de cobros.
-* **Interfaz Moderna:** Dashboard interactivo construido con React, Tailwind CSS y Lucide Icons.
-
-## 🛠️ Tecnologías Utilizadas
-
-### Frontend
-* **React.js** (Vite)
-* **Tailwind CSS** (Estilos)
-* **React Router Dom** (Navegación)
-* **Axios** (Peticiones API)
-* **Lucide React** (Iconografía)
-
-### Backend
-* **Node.js & Express**
-* **PostgreSQL** (Base de datos relacional)
-* **node-postgres (pg)** (Driver de conexión)
-* **JSON Web Tokens** (Seguridad)
+> Una solución Fullstack moderna para administrar propiedades, contratos y cobranzas con eficiencia y elegancia.
 
 ---
 
-## ⚙️ Configuración del Proyecto
+![Banner del Proyecto](https://via.placeholder.com/800x400?text=Dashboard+Sistema+Alquileres) 
+*(Sugerencia: Reemplaza este link por un GIF de tu aplicación funcionando o una captura de pantalla de tu Login/Dashboard)*
 
-### 1. Requisitos Previos
-* Node.js instalado (v18 o superior)
-* PostgreSQL corriendo localmente.
+---
 
-### 2. Base de Datos
-Ejecuta el siguiente script en tu consola de PostgreSQL para preparar las tablas de seguridad:
+## 🚀 Vista Previa
+| Login Page | Dashboard | Registro de Pagos |
+|---|---|---|
+| ![Login](https://via.placeholder.com/250x150) | ![Dashboard](https://via.placeholder.com/250x150) | ![Pagos](https://via.placeholder.com/250x150) |
+
+---
+
+## 📋 Descripción
+Este sistema fue diseñado para digitalizar el control de alquileres. Permite desde el registro seguro de administradores hasta el seguimiento detallado de estados de cuenta por contrato, utilizando una arquitectura **PERN Stack** (PostgreSQL, Express, React, Node.js).
+
+## ✨ Características Principales
+* **🔐 Autenticación Robusta:** Login/Registro con contraseñas encriptadas (`bcryptjs`) y sesiones vía `JWT`.
+* **👥 Gestión de Inquilinos:** CRUD completo (Crear, Leer, Actualizar, Borrar).
+* **🏠 Control de Unidades:** Gestión de propiedades y sus respectivas unidades/cuartos.
+* **📑 Contratos Inteligentes:** Vinculación de inquilinos con unidades y montos de renta.
+* **💰 Historial de Pagos:** Registro de ingresos y consulta de historial de cobranza.
+* **🎨 UI/UX Premium:** Interfaz responsive con Tailwind CSS, modo oscuro y efectos Glassmorphism.
+
+## 🛠️ Tecnologías Utilizadas
+### Frontend
+* **React.js** (Vite) + **React Router Dom**
+* **Tailwind CSS** (Diseño y Layout)
+* **Lucide React** (Iconografía Moderna)
+* **Axios** (Consumo de API)
+
+### Backend
+* **Node.js & Express**
+* **PostgreSQL** (Persistencia de Datos)
+* **Bcrypt.js** (Seguridad de Credenciales)
+* **JWT** (Tokens de Acceso)
+
+---
+
+## ⚙️ Configuración e Instalación Local
+
+### 1. Base de Datos (PostgreSQL)
+Crea una base de datos llamada `sistema_alquileres` y ejecuta los siguientes scripts iniciales:
 
 ```sql
 CREATE TABLE usuarios (
@@ -45,56 +56,51 @@ CREATE TABLE usuarios (
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Nota: Asegúrate de tener también tus tablas de inquilinos, unidades y pagos creadas.
+
+Configura el archivo .env en la carpeta backend/:
 PORT=3000
-DB_USER=tu_usuario
+DB_USER=tu_usuario_postgres
 DB_HOST=localhost
 DB_NAME=sistema_alquileres
-DB_PASSWORD=tu_password
+DB_PASSWORD=tu_contraseña
 DB_PORT=5432
-JWT_SECRET=clave_maestra_segura_123
+JWT_SECRET=tu_firma_secreta_aqui
 
-
-
-4. Instalación
-En ambas carpetas (frontend y backend), ejecuta:
-
-Bash
+4. Instalación y Despliegue
+En la raíz de ambas carpetas (frontend y backend):
 npm install
-5. Ejecución
-Backend: npm run dev (desde la carpeta backend)
 
-Frontend: npm run dev (desde la carpeta frontend)
+Para iniciar el entorno de desarrollo:
 
-📂 Estructura del Backend (src)
-app.js: Punto de entrada del servidor.
+Backend: npm run dev
 
-config/db.js: Configuración del Pool de conexión a Postgres.
+Frontend: npm run dev
 
-controllers/: Lógica de negocio (auth, inquilinos, etc.).
+🚀 Próximas Implementaciones (Roadmap)
+[ ] Exportación PDF: Generar recibos de pago con un solo click.
 
-routes/: Definición de endpoints de la API.
+[ ] Dashboard Analytics: Gráficos estadísticos de ingresos mensuales.
 
+[ ] Cloud Storage: Subida de documentos de identidad y contratos en PDF.
 
----
+[ ] WhatsApp Integration: Envío de recordatorios de pago automáticos.
 
-## 💡 Próximos Pasos e Implementaciones
+👤 Autor
+Desarrollado con pasión por Jhon.
 
-Ya que tienes el núcleo funcionando, aquí tienes algunas ideas de qué más puedes "meterle" para que sea una aplicación de nivel empresarial:
+GitHub
 
-1.  **Protección de Rutas en el Backend (Middleware):**
-    * Actualmente, si alguien sabe la URL del backend, podría intentar borrar un inquilino. Necesitamos un archivo `authMiddleware.js` que verifique el token JWT antes de permitir acciones en las rutas de inquilinos o pagos.
+LinkedIn
 
-2.  **Dashboard de Estadísticas:**
-    * Una página de "Inicio" que te diga: ¿Cuántos inquilinos deben mes?, ¿Cuánto dinero se ha cobrado este mes?, ¿Cuántas unidades están vacías?
-
-3.  **Generación de Recibos en PDF:**
-    * Al registrar un cobro, que el sistema genere automáticamente un PDF para enviarle al inquilino por WhatsApp.
-
-4.  **Subida de Archivos:**
-    * Poder subir una foto del contrato firmado o del DNI del inquilino directamente al perfil.
-
+© 2026 - Sistema de Gestión Inmobiliaria
 
 
 ---
 
-**¡Estoy listo para tus dudas!** Dime qué parte te genera curiosidad o qué función te gust
+
+
+### ¿Qué sigue ahora?
+Cuando estés listo para subirlo a **GitHub**, no olvides añadir tus fotos reales donde están los cuadros de `via.placeholder`. 
+
+**¿Quieres que te guíe con los comandos para subir todo esto a GitHub por primera
